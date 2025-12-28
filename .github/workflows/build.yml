@@ -1,24 +1,22 @@
-name: Build Jarvis APK
+name: Jarvis Build
 on: [push]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      # 1. Build the APK using GitHub's Servers
-      - name: Build with Buildozer
+      - name: Build APK
         uses: ArtemSBulgakov/buildozer-action@v1
         id: buildozer
         with:
           command: buildozer android debug
           buildozer_version: master
 
-      # 2. Upload the APK so you can download it
       - name: Upload APK
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: Jarvis-APK
+          name: jarvis-apk
           path: bin/*.apk
           
